@@ -6,7 +6,7 @@ All installation scripts for Hadoop, Spark, and Hive have been created and are r
 
 ### Installation Scripts (9 files)
 1. ✅ `install_hadoop.sh` - Installs Hadoop 3.4.0
-2. ✅ `install_spark.sh` - Installs Spark 3.5.1  
+2. ✅ `install_spark.sh` - Installs Spark 3.5.3  
 3. ✅ `install_hive.sh` - Installs Hive 3.1.3
 4. ✅ `configure_hadoop.sh` - Configures Hadoop for single-node
 5. ✅ `configure_spark.sh` - Configures Spark with Hive support

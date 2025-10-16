@@ -23,7 +23,7 @@ Run the master setup script that installs everything:
 
 This will:
 1. Install Hadoop 3.4.0 to `/opt/hadoop`
-2. Install Spark 3.5.1 to `/opt/spark`
+2. Install Spark 3.5.3 to `/opt/spark`
 3. Install Hive 3.1.3 to `/opt/hive`
 4. Configure all components
 5. Update your `~/.bashrc` with environment variables

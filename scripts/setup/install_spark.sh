@@ -1,18 +1,18 @@
 #!/bin/bash
-# Install Apache Spark 3.5.1 (Standalone Mode)
+# Install Apache Spark 3.5.3 (Standalone Mode)
 
 set -e  # Exit on error
 
 echo "=========================================="
-echo "Apache Spark 3.5.1 Installation Script"
+echo "Apache Spark 3.5.3 Installation Script"
 echo "=========================================="
 
 # Configuration
-SPARK_VERSION="3.5.1"
+SPARK_VERSION="3.5.3"
 HADOOP_VERSION="3"  # Spark built for Hadoop 3
 INSTALL_DIR="/opt"
 SPARK_HOME="$INSTALL_DIR/spark"
-DOWNLOAD_URL="https://dlcdn.apache.org/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz"
+DOWNLOAD_URL="https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz"
 
 # Check if running as root for /opt installation
 if [ ! -w "$INSTALL_DIR" ]; then
@@ -42,8 +42,14 @@ if [ ! -f "spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz" ]; then
     echo "Step 2: Downloading Spark ${SPARK_VERSION}..."
     echo "From: $DOWNLOAD_URL"
     wget "$DOWNLOAD_URL" || {
-        echo "ERROR: Failed to download Spark. Please check your internet connection."
-        exit 1
+        echo "ERROR: Failed to download Spark from primary mirror."
+        echo "Trying alternative mirror..."
+        DOWNLOAD_URL="https://dlcdn.apache.org/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz"
+        wget "$DOWNLOAD_URL" || {
+            echo "ERROR: Failed to download Spark. Please check your internet connection."
+            echo "You can manually download from: https://spark.apache.org/downloads.html"
+            exit 1
+        }
     }
 else
     echo ""
