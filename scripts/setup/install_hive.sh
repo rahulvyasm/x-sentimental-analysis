@@ -11,7 +11,7 @@ echo "=========================================="
 HIVE_VERSION="3.1.3"
 INSTALL_DIR="/opt"
 HIVE_HOME="$INSTALL_DIR/hive"
-DOWNLOAD_URL="https://dlcdn.apache.org/hive/hive-${HIVE_VERSION}/apache-hive-${HIVE_VERSION}-bin.tar.gz"
+DOWNLOAD_URL="https://archive.apache.org/dist/hive/hive-${HIVE_VERSION}/apache-hive-${HIVE_VERSION}-bin.tar.gz"
 
 # Check if running as root for /opt installation
 if [ ! -w "$INSTALL_DIR" ]; then
@@ -47,8 +47,14 @@ if [ ! -f "apache-hive-${HIVE_VERSION}-bin.tar.gz" ]; then
     echo "Step 2: Downloading Hive ${HIVE_VERSION}..."
     echo "From: $DOWNLOAD_URL"
     wget "$DOWNLOAD_URL" || {
-        echo "ERROR: Failed to download Hive. Please check your internet connection."
-        exit 1
+        echo "ERROR: Failed to download Hive from primary mirror."
+        echo "Trying alternative mirror..."
+        DOWNLOAD_URL="https://dlcdn.apache.org/hive/hive-${HIVE_VERSION}/apache-hive-${HIVE_VERSION}-bin.tar.gz"
+        wget "$DOWNLOAD_URL" || {
+            echo "ERROR: Failed to download Hive. Please check your internet connection."
+            echo "You can manually download from: https://hive.apache.org/downloads.html"
+            exit 1
+        }
     }
 else
     echo ""
