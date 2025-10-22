@@ -217,7 +217,7 @@ Educational project for Big Data sentiment analysis pipeline demonstration.
 
 ## 👤 Author
 
-Rahul Vyasm
+Rahul Vyas M
 
 ---
 
